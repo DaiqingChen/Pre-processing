@@ -1,0 +1,4 @@
+cat JL-HT-01_S45_R1_001.fastq.gz JL-HT-01-FC02_S48_R1_001.fastq.gz > 01_R1.fastq.gz
+
+cat *R2* > 03_R2.fastq.gz
+cat *R1* > 03_R1.fastq.gz

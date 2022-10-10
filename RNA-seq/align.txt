@@ -1,0 +1,84 @@
+cd C:\Program Files (x86)\fastqc_v0.11.9\FastQC
+java -Xmx250m -classpath .;./sam-1.103.jar;./jbzip2-0.9.jar uk.ac.babraham.FastQC.FastQCApplication C:\LiaoLab\HawChih\RNAseq\Y_WT\01_R1.fastq.gz
+
+bowtie is not suitable for RNAseq, should use STAR
+conda install -c bioconda star
+
+1. generate genome indexes files
+FASTA + GTF annotaion file
+(1)download genome
+http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M23/
+or use wget + address
+http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M23/gencode.vM23.annotation.gtf.gz
+http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M23/GRCm38.primary_assembly.genome.fa.gz
+
+gunzip gencode.vM23.annotation.gtf.gz
+gunzip GRCm38.primary_assembly.genome.fa.gz
+
+A new directory has to be created (with mkdir) before STAR run for the new index files.
+The file system needs to have at least 100GB of disk space available for a typical mammalian genome. 
+It is recommended to remove all files from the genome directory before running the genome generation step. 
+
+STAR --runThreadN 6 --runMode genomeGenerate --genomeDir IndexGenome --genomeFastaFiles GRCm38.primary_assembly.genome.fa --sjdbGTFfile gencode.vM23.annotation.gtf --sjdbOverhang 107
+
+log:
+STAR --runThreadN 6 --runMode genomeGenerate --genomeDir IndexGenome --genomeFastaFiles GRCm38.primary_assembly.genome.fa --sjdbGTFfile gencode.vM23.annotation.gtf --sjdbOverhang 107
+        STAR version: 2.7.9a   compiled: 2021-05-04T09:43:56-0400 vega:/home/dobin/data/STAR/STARcode/STAR.master/source
+Sep 14 11:26:34 ..... started STAR run
+Sep 14 11:26:34 ... starting to generate Genome files
+Sep 14 11:27:19 ..... processing annotations GTF
+Sep 14 11:27:37 ... starting to sort Suffix Array. This may take a long time...
+Sep 14 11:27:49 ... sorting Suffix Array chunks and saving them to disk...
+Sep 14 11:51:34 ... loading chunks from disk, packing SA...
+Sep 14 11:53:54 ... finished generating suffix array
+Sep 14 11:53:54 ... generating Suffix Array index
+Sep 14 11:57:29 ... completed Suffix Array index
+Sep 14 11:57:30 ..... inserting junctions into the genome indices
+Sep 14 12:01:29 ... writing Genome to disk ...
+Sep 14 12:01:40 ... writing Suffix Array to disk ...
+Sep 14 12:03:18 ... writing SAindex to disk
+Sep 14 12:03:26 ..... finished successfully
+
+2. mapping reads
+(1) Have to unzip first
+gunzip *.fastq.gz
+
+(2) Run multiple samples at the same time
+Run once: STAR --runMode alignReads --runThreadN 6 --outSAMtype BAM SortedByCoordinate --genomeDir IndexGenome/ --outFileNamePrefix Y_WT/02Align/ --readFilesIn  raw_data/02_R1.fastq raw_data/02_R2.fastq
+
+Want to run in bash
+i. write codes in notepad, rename .sh
+ii. dos2unix ./AlignRun.sh
+iii. chmod u+x 
+./
+
+
+STAR --genomeLoad LoadAndExit --genomeDir IndexGenome
+
+for i in $(ls raw_data); do echo STAR --genomeDir IndexGenome --genomeLoad LoadAndKeep\
+--readFilesIn raw_data/${i}_R1.fastq raw_data/${i}_R2.fastq \
+--runThreadN 6 --outFileNamePrefix aligned/$i. \
+--outSAMtype BAM SortedByCoordinate 
+
+rm *${i}* ; done
+
+STAR --genomeLoad Remove --genomeDir IndexGenome
+
+
+
+
+
+
+
+
+
+
+
+cd Comb/WT
+#1. samtools view -@6 -h -S -b -o WT_rep3-algn.bam WT_rep3-algn.sam
+#2. samtools sort -@6 WT_rep3-algn.bam -o WT_rep3-sorted.bam
+3. samtools view -@6 -F 0x04 -b WT_rep3-sorted.bam > WT_rep3-filt.bam (remove unmapped)
+4. samtools view -@6 -F 0x400 -b WT_rep3-filt.bam > WT_rep3-filt2.bam (remove duplicated)
+5. samtools index WT_rep3-filt2.bam
+
+

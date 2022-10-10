@@ -1,0 +1,229 @@
+feature count, download from source
+
+wget https://sourceforge.net/projects/subread/files/subread-2.0.3/subread-2.0.3-source.tar.gz
+sudo tar xvzf *subread*
+
+#################
+sudo apt install subread
+
+need to sort by samtools first-->it's the same
+
+
+
+
+featureCounts -T 4 -p -a gencode.vM23.annotation.gtf -o featurecount.txt STAR/*.out.bam  2> featurecount_output.log
+
+
+log:
+
+        ==========     _____ _    _ ____  _____  ______          _____
+        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \
+          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+          v2.0.0
+
+//========================== featureCounts setting ===========================\\
+||                                                                            ||
+||             Input files : 24 BAM files                                     ||
+||                           o 01Aligned.sortedByCoord.out.bam                ||
+||                           o 02Aligned.sortedByCoord.out.bam                ||
+||                           o 03Aligned.sortedByCoord.out.bam                ||
+||                           o 04Aligned.sortedByCoord.out.bam                ||
+||                           o 05Aligned.sortedByCoord.out.bam                ||
+||                           o 06Aligned.sortedByCoord.out.bam                ||
+||                           o 07Aligned.sortedByCoord.out.bam                ||
+||                           o 08Aligned.sortedByCoord.out.bam                ||
+||                           o 09Aligned.sortedByCoord.out.bam                ||
+||                           o 10Aligned.sortedByCoord.out.bam                ||
+||                           o 11Aligned.sortedByCoord.out.bam                ||
+||                           o 12Aligned.sortedByCoord.out.bam                ||
+||                           o 13Aligned.sortedByCoord.out.bam                ||
+||                           o 14Aligned.sortedByCoord.out.bam                ||
+||                           o 15Aligned.sortedByCoord.out.bam                ||
+||                           o 16Aligned.sortedByCoord.out.bam                ||
+||                           o 17Aligned.sortedByCoord.out.bam                ||
+||                           o 18Aligned.sortedByCoord.out.bam                ||
+||                           o 19Aligned.sortedByCoord.out.bam                ||
+||                           o 20Aligned.sortedByCoord.out.bam                ||
+||                           o 21Aligned.sortedByCoord.out.bam                ||
+||                           o 22Aligned.sortedByCoord.out.bam                ||
+||                           o 23Aligned.sortedByCoord.out.bam                ||
+||                           o 24Aligned.sortedByCoord.out.bam                ||
+||                                                                            ||
+||             Output file : featurecount.txt                                 ||
+||                 Summary : featurecount.txt.summary                         ||
+||              Annotation : gencode.vM23.annotation.gtf (GTF)                ||
+||      Dir for temp files : ./                                               ||
+||                                                                            ||
+||                 Threads : 4                                                ||
+||                   Level : meta-feature level                               ||
+||              Paired-end : yes                                              ||
+||      Multimapping reads : not counted                                      ||
+|| Multi-overlapping reads : not counted                                      ||
+||   Min overlapping bases : 1                                                ||
+||                                                                            ||
+||          Chimeric reads : counted                                          ||
+||        Both ends mapped : not required                                     ||
+||                                                                            ||
+\\============================================================================//
+
+//================================= Running ==================================\\
+||                                                                            ||
+|| Load annotation file gencode.vM23.annotation.gtf ...                       ||
+||    Features : 841606                                                       ||
+||    Meta-features : 55335                                                   ||
+||    Chromosomes/contigs : 22                                                ||
+||                                                                            ||
+|| Process BAM file 01Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 35215468                                             ||
+||    Successfully assigned alignments : 26970812 (76.6%)                     ||
+||    Running time : 0.71 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 02Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36208423                                             ||
+||    Successfully assigned alignments : 25662812 (70.9%)                     ||
+||    Running time : 1.28 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 03Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36962598                                             ||
+||    Successfully assigned alignments : 25414598 (68.8%)                     ||
+||    Running time : 1.41 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 04Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 37179354                                             ||
+||    Successfully assigned alignments : 24942149 (67.1%)                     ||
+||    Running time : 1.39 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 05Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36766979                                             ||
+||    Successfully assigned alignments : 26070468 (70.9%)                     ||
+||    Running time : 1.14 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 06Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36020377                                             ||
+||    Successfully assigned alignments : 25912629 (71.9%)                     ||
+||    Running time : 0.93 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 07Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36650397                                             ||
+||    Successfully assigned alignments : 26242148 (71.6%)                     ||
+||    Running time : 1.04 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 08Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 34987819                                             ||
+||    Successfully assigned alignments : 26634309 (76.1%)                     ||
+||    Running time : 0.69 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 09Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36145456                                             ||
+||    Successfully assigned alignments : 26448816 (73.2%)                     ||
+||    Running time : 1.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 10Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 35605858                                             ||
+||    Successfully assigned alignments : 27644933 (77.6%)                     ||
+||    Running time : 0.70 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 11Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 35219477                                             ||
+||    Successfully assigned alignments : 26928826 (76.5%)                     ||
+||    Running time : 0.76 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 12Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 35806730                                             ||
+||    Successfully assigned alignments : 26285013 (73.4%)                     ||
+||    Running time : 0.85 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 13Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36936530                                             ||
+||    Successfully assigned alignments : 24659093 (66.8%)                     ||
+||    Running time : 1.64 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 14Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 37216769                                             ||
+||    Successfully assigned alignments : 24922809 (67.0%)                     ||
+||    Running time : 1.50 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 15Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36758137                                             ||
+||    Successfully assigned alignments : 25978767 (70.7%)                     ||
+||    Running time : 1.10 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 16Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38180785                                             ||
+||    Successfully assigned alignments : 24674049 (64.6%)                     ||
+||    Running time : 1.68 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 17Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38389315                                             ||
+||    Successfully assigned alignments : 25411317 (66.2%)                     ||
+||    Running time : 1.78 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 18Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38258296                                             ||
+||    Successfully assigned alignments : 25345520 (66.2%)                     ||
+||    Running time : 1.44 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 19Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 35945261                                             ||
+||    Successfully assigned alignments : 25605693 (71.2%)                     ||
+||    Running time : 0.98 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 20Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38228943                                             ||
+||    Successfully assigned alignments : 24702202 (64.6%)                     ||
+||    Running time : 1.77 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 21Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38075721                                             ||
+||    Successfully assigned alignments : 24539152 (64.4%)                     ||
+||    Running time : 1.96 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 22Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 37711909                                             ||
+||    Successfully assigned alignments : 23928981 (63.5%)                     ||
+||    Running time : 1.86 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38349514                                             ||
+||    Successfully assigned alignments : 25606623 (66.8%)                     ||
+||    Running time : 1.59 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24Aligned.sortedByCoord.out.bam...                        ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36472029                                             ||
+||    Successfully assigned alignments : 25417990 (69.7%)                     ||
+||    Running time : 1.21 minutes                                             ||
+||                                                                            ||
+||                                                                            ||
+|| Summary of counting results can be found in file "featurecount.txt.summar  ||
+|| y"                                                                         ||
+||                                                                            ||
+\\============================================================================//
+
+(base) daiqing@MED-40160:/mnt/c/LiaoLab/HawChih/RNAseq$

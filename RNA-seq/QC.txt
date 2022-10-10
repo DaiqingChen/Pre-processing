@@ -1,0 +1,32 @@
+RUN fastqc on PC
+1. figure out which directory we are at, go to the fastqc folder
+pwd
+C: 
+cd/ (go back to root)
+
+cd C:\Program Files (x86)\fastqc_v0.11.9\FastQC
+java -Xmx250m -classpath .;./sam-1.103.jar;./jbzip2-0.9.jar uk.ac.babraham.FastQC.FastQCApplication 
+C:\Users\daiqingc\Desktop\RNAseq\JKL-01_S21_R2_001.fastq.gz
+
+Started analysis of JKL-01_S21_R2_001.fastq.gz
+Analysis complete for JKL-01_S21_R2_001.fastq.gz
+
+output would be at the same folder of raw data
+
+RUN MULTIPLE FILES
+java -Xmx250m -classpath .;./sam-1.103.jar;./jbzip2-0.9.jar uk.ac.babraham.FastQC.FastQCApplication 
+C:\Users\daiqingc\Desktop\RNAseq\*.gz
+
+
+2. build result folder, move
+mkdir C:\Users\daiqingc\Desktop\RNAseq\result\fastqc
+cd C:\Users\daiqingc\Desktop\RNAseq
+mv *fastqc* C:\Users\daiqingc\Desktop\RNAseq\result\fastqc
+
+
+3. multiqc
+Open anaconda terminal
+multiqc --version
+cd C:\ChIPseq\210611_A00639_0727_AHFNKFDRXY-NovaRS-61-FC01-LS-CS16\result\fastqc\
+multiqc .
+(multiqc --help)

@@ -1,0 +1,62 @@
+Go to Z shared folder
+cd /mnt
+sudo mkdir z
+sudo mount -t drvfs Z: /mnt/z
+
+To be able to work in a new place, make sure we have the permission for rwx
+sudo chmod +w *
+(https://www.cis.rit.edu/class/simg211/unixintro/Access_Permissions.html)
+check the number of file handles limit by ulimit -Sn /ulimit -Hn  then set bigger value ulimit -n 16386
+(https://www.ibm.com/docs/en/rational-clearcase/9.0.2?topic=servers-increasing-number-file-handles-linux-workstations)
+
+1. get reference genome (GRCm39)
+http://ftp.ebi.ac.uk/pub/databases/gencode/  This directory contains data files produced by the GENCODE project which is headed by Paul Flicek at the EMBL-EBI, UK. For questions, please contact gencode-help@ebi.ac.uk and check the website http://www.gencodegenes.org
+
+use the newest vM27 annotation
+wget http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M27/gencode.vM27.annotation.gtf.gz
+wget http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M27/GRCm39.primary_assembly.genome.fa.gz
+
+gunzip *.gz
+
+before running
+(1) make sure you have rwx right in the direction
+(2) make IndexGenome folder for saving the result
+STAR --runThreadN 6 --runMode genomeGenerate --genomeDir IndexGenome --genomeFastaFiles GRCm39.primary_assembly.genome.fa --sjdbGTFfile gencode.vM27.annotation.gtf --sjdbOverhang 107
+
+
+2. edit our .sh script
+using Emacs as text editor
+https://www.digitalocean.com/community/tutorials/how-to-use-the-emacs-editor-in-linux
+
+EXITING because of FATAL ERROR: could not create output file: Align/Log.out
+SOLUTION: check if the path Align/ exists and you have permissions to write there
+
+unable to create a directory
+
+3. RUN
+go to raw_data folder
+sh run.sh, will go over every folder
+
+mv /mnt/c/LiaoLab/Nikola /mnt/z/LiaoBioInfo/daiqingc
+
+featurecount
+
+featureCounts -T 4 -p -a ../gencode.v38.annotation.gtf -o FC01featurecount.txt STAR/*.out.bam  2> featurecount_output.log
+
+
+
+UNABLE TO WRITE TO FOLDER
+VERY WEIRED
+move back to c
+(base) daiqing@MED-40160:/mnt/z/LiaoBioInfo/daiqingc/HawChih/RNAseq-Adipocytes/raw_data/01$ sh ../../script/align.sh
+gzip: *.fastq.gz: No such file or directory
+        STAR --runMode alignReads --runThreadN 6 --outSAMtype BAM SortedByCoordinate --genomeDir ../../IndexGenome/IndexGenome/ --outFileNamePrefix ../ --readFilesIn JL-HT-01_S63_R1_001.fastq JL-HT-01_S63_R2_001.fastq
+        STAR version: 2.7.9a   compiled: 2021-05-04T09:43:56-0400 vega:/home/dobin/data/STAR/STARcode/STAR.master/source
+Dec 01 15:19:20 ..... started STAR run
+Dec 01 15:19:20 ..... loading genome
+Dec 01 15:23:40 ..... started mapping
+
+BAMoutput.cpp:27:BAMoutput: exiting because of *OUTPUT FILE* error: could not create output file ../_STARtmp//BAMsort/0/0
+SOLUTION: check that the path exists and you have write permission for this file. Also check ulimit -n and increase it to allow more open files.
+
+Dec 01 15:23:40 ...... FATAL ERROR, exiting
