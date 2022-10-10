@@ -1,0 +1,7 @@
+Motif searching
+
+preprare the fasta file for motif searching
+cut -f 1,2,3 merged_cat.bed > merged_simple.bed
+
+cd ..
+bedtools getfasta -fi bowtie2mapping/GRCm39.genome.fa -bed Comb/merged_simple.bed -fo merged-dreme.fasta

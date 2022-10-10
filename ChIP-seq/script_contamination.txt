@@ -1,0 +1,51 @@
+Remove contamination
+
+1. configuration
+cd FastQ-Screen-0.14.1
+ls 
+cp fastq_screen.conf.example fastq_screen.conf
+emacs fastq_screen.conf
+
+
+(1) set aligner: bowtie2
+BOWTIE2 /home/daiqing/miniconda3/bin/bowtie2-align-s
+(2) set reference 
+/mnt/c/ChIPseq/bowtie2mapping/hg18
+(3) save
+Ctrl+x ctrl+s
+(4) exit
+type Control-X-Control-C
+
+go back to the home folder
+cd..
+
+2. run program
+FastQ-Screen-0.14.1/fastq_screen /mnt/c/ChIPseq/Comb/WT/LS-CS-01_S1_R1_001.fastq.gz
+
+FastQ-Screen-0.14.1/fastq_screen /mnt/c/ChIPseq/Comb/*.gz
+
+Q:Perl module GD::Graph::bars not installed, skipping charts
+A:perl -MCPAN -e 'install GD::Graph'
+
+remove folder:
+sudo rm -r -f /path
+
+3. take a look
+open file explore, paste
+C:\Users\daiqingc\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\home\daiqing
+
+4. filtering
+FastQ-Screen-0.14.1/fastq_screen --tag /mnt/c/ChIPseq/Comb/LS-CS-03_S47_R1_001.fastq.gz
+FastQ-Screen-0.14.1/fastq_screen --tag --filter 03 /mnt/c/ChIPseq/Comb/LS-CS-03_S47_R1_001.fastq.gz LS-CS-03_S47_R2_001.fastq.gz LS-CS-04_S48_R1_001.fastq.gz LS-CS-04_S48_R2_001.fastq.gz LS-CS-11_S55_R1_001.fastq.gz LS-CS-11_S55_R2_001.fastq.gz LS-CS-12_S56_R1_001.fastq.gz LS-CS-12_S56_R2_001.fastq.gz
+FastQ-Screen-0.14.1/fastq_screen --tag --filter 03 /mnt/c/ChIPseq/Comb/LS-CS-03_S47_R1_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-03_S47_R2_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-04_S48_R1_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-04_S48_R2_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-11_S55_R1_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-11_S55_R2_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-12_S56_R1_001.fastq.gz /mnt/c/ChIPseq/Comb/LS-CS-12_S56_R2_001.fastq.gz
+
+FastQ-Screen-0.14.1/fastq_screen --tag --filter 03 /mnt/c/ChIPseq/Comb/LS-CS-04_S48_R1_001.fastq.gz
+
+
+
+
+
+
+
+
+

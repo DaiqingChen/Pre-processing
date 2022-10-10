@@ -1,0 +1,2 @@
+cd /mnt/c/ChIPseq/Comb/KO/rep4
+bamCoverage -b WT_rep1-filt2.bam -o WT_rep1.bw --binSize 10 --normalizeUsing BPM -p 6 2> WT_rep1_bigwig.log
